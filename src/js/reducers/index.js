@@ -1,24 +1,33 @@
-import { ADD_ARTICLE } from '../constants/action-types';
+// import { ADD_ARTICLE } from '../constants/action-types';
+import { ADD_ARTICLE } from '../actions/index';
+import { initialState } from './initialState';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  articles: []
+// JavaScript 
+export const RootState = {
+  data: DataState
 };
 
-function rootReducer(state = initialState, action) {
-  if (action.type === ADD_ARTICLE) {
-   return Object.assign({}, state, {
-     articles: state.articles.concat(action.payload)
-   });
+export const dataReducer = (state = initialState, action) => {
+  switch (action.type) {
+
+    case action.ADD_ARTICLE:
+      return Object.assign({}, state, {
+        articles: state.articles.concat(action.payload)
+      });
+  
+    default: 
+      return state;  
+
   }
-  return state;
 };
 
-export default rootReducer;
-
+export const rootReducer = combineReducers({
+  data: dataReducer
+});
 
 // NOTE!
-// we must use code in lines 9-10 because
-// we need to create a new state
+// we must use code in lines 9-10 because we need to create a new state
 // the old state cannot be modified, due to redux rules of immutability
 // as such, we must return a new JS object
 

@@ -4,10 +4,9 @@ export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload };
 }
 
-export function getData() {
-  return { type: "DATA_REQUESTED" };
+export function getData(url) {
+  return { type: "DATA_REQUESTED", payload: { url } };
 }
-
 
 // NOTE!
 // You can notice that the type property is a string. 
